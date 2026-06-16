@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#000000" />
+    <title>Project Projection — AR Projectile</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div id="splash">
+      <h1>Project Projection</h1>
+      <p class="tagline">An AR physics sandbox. Aim, throw, observe.</p>
+      <div id="splash-status">Checking WebXR support…</div>
+      <div id="ar-button-slot"></div>
+      <details class="how-to">
+        <summary>How to use</summary>
+        <ol>
+          <li>Open in <strong>Chrome on Android</strong> (with ARCore) or a WebXR-capable headset browser.</li>
+          <li>Tap <strong>Enter AR</strong>, point at the floor, then tap the screen to place the launcher.</li>
+          <li>Adjust <strong>angle</strong> and <strong>velocity</strong>, then tap <strong>Throw</strong>.</li>
+          <li>Tap <strong>Retrieve Ball</strong> — or, on a hand-tracking headset, hold a fist for a moment — to reset.</li>
+        </ol>
+      </details>
+    </div>
+
+    <div id="overlay" aria-hidden="true">
+      <div id="status-pill">Looking for a surface…</div>
+
+      <div id="data-layer"></div>
+
+      <div id="controls" data-state="hidden">
+        <div class="slider-row">
+          <label for="angle">Angle</label>
+          <input id="angle" type="range" min="0" max="90" step="1" value="45" />
+          <span id="angle-value" class="value">45°</span>
+        </div>
+        <div class="slider-row">
+          <label for="velocity">Velocity</label>
+          <input id="velocity" type="range" min="1" max="30" step="0.5" value="10" />
+          <span id="velocity-value" class="value">10.0 m/s</span>
+        </div>
+        <button id="throw-btn" type="button" class="primary">Throw</button>
+        <div id="hand-pill" hidden>✋ Hand gesture active — make a fist to retrieve</div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
