@@ -148,18 +148,20 @@ body { overflow: hidden; }
   min-width: 140px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  /* Anchor is at the ball; offset card up-and-right so the ball is never covered. */
-  transform: translate(40px, -130%);
+  /* Anchor is exactly at the ball; shift purely to the right with vertical center so the
+     ball is never covered regardless of viewing angle. */
+  transform: translate(28px, -50%);
   white-space: nowrap;
   pointer-events: none;
 }
+
 .ball-label::before {
   /* Small connector line from the card back toward the ball anchor. */
   content: '';
   position: absolute;
-  left: -28px;
-  bottom: 10px;
-  width: 28px;
+  left: -20px;
+  top: 50%;
+  width: 20px;
   height: 1px;
   background: var(--panel-stroke);
 }

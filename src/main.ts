@@ -54,7 +54,7 @@ launcher.root.add(ball.mesh);
 
 const dataLabel = createDataLabel();
 launcher.root.add(dataLabel.object);
-dataLabel.object.position.set(0, 0.06, 0); // overridden each frame while throwing
+dataLabel.object.position.set(0, 0, 0); // overridden each frame while throwing
 
 // ---------- XR helpers ----------
 const hitTester = new HitTester();
@@ -244,7 +244,7 @@ function onXRFrame(_t: number, frame?: XRFrame): void {
         // Snap to landing point.
         const last = currentSim[currentSim.length - 1];
         ball.setPosition(last.x, last.y, 0);
-        dataLabel.object.position.set(last.x, last.y + 0.06, 0);
+        dataLabel.object.position.set(last.x, last.y, 0);
         dataLabel.update({
           velocity: speedOf(last),
           height: Math.max(0, last.y),
@@ -258,7 +258,7 @@ function onXRFrame(_t: number, frame?: XRFrame): void {
       } else {
         const p = sampleAt(currentSim, elapsedS);
         ball.setPosition(p.x, p.y, 0);
-        dataLabel.object.position.set(p.x, p.y + 0.06, 0);
+        dataLabel.object.position.set(p.x, p.y, 0);
         dataLabel.update({
           velocity: speedOf(p),
           height: Math.max(0, p.y),
