@@ -1,9 +1,9 @@
 import * as THREE from 'three';
 import { sampleAt, type SimPoint } from '../physics/projectile';
 
-const MAX_DOTS = 48;
+const MAX_DOTS = 128;
 const DOT_RADIUS = 0.012;        // 1.2 cm spheres
-const DOT_SPACING_S = 0.08;      // ~12 dots per second of flight
+const DOT_SPACING_S = 1 / 24;    // 24 dots per second of flight
 
 export interface TrajectoryLine {
   object: THREE.Object3D;

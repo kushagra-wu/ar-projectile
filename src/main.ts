@@ -184,7 +184,9 @@ function startThrow(): void {
   throwStartTimeMs = performance.now();
   ball.setVisible(true);
   dataLabel.setVisible(true);
-  trajectory.setVisible(false); // hide predicted path during the actual throw
+  // Keep the predicted-path dots visible during flight so the user can compare
+  // the ball's actual motion to the prediction.
+  trajectory.setVisible(true);
   overlay.setStatus('Ball in flight…');
   setState({ mode: 'throwing' });
 }
