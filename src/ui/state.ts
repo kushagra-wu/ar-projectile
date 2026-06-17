@@ -5,6 +5,8 @@ export interface AppState {
   angle: number;
   /** Initial velocity in m/s, 1–30. */
   velocity: number;
+  /** Horizontal launch direction in degrees, -180 to 180 (yaw around world Y). */
+  direction: number;
   /** High-level interaction mode. */
   mode: Mode;
   /** Whether the launcher has been anchored in the world. */
@@ -18,6 +20,7 @@ type Listener = (s: Readonly<AppState>) => void;
 const state: AppState = {
   angle: 45,
   velocity: 10,
+  direction: 0,
   mode: 'idle',
   placed: false,
   handTrackingActive: false,

@@ -27,6 +27,8 @@ export function initOverlay(handlers: OverlayHandlers): OverlayApi {
   const angleValue = requireEl<HTMLSpanElement>('angle-value');
   const velInput = requireEl<HTMLInputElement>('velocity');
   const velValue = requireEl<HTMLSpanElement>('velocity-value');
+  const dirInput = requireEl<HTMLInputElement>('direction');
+  const dirValue = requireEl<HTMLSpanElement>('direction-value');
   const throwBtn = requireEl<HTMLButtonElement>('throw-btn');
   const statusPill = requireEl<HTMLDivElement>('status-pill');
   const handPill = requireEl<HTMLDivElement>('hand-pill');
@@ -35,7 +37,8 @@ export function initOverlay(handlers: OverlayHandlers): OverlayApi {
   const s0 = getState();
   angleInput.value = String(s0.angle);
   velInput.value = String(s0.velocity);
-  renderReadouts(s0.angle, s0.velocity);
+  dirInput.value = String(s0.direction);
+  renderReadouts(s0.angle, s0.velocity, s0.direction);
 
   // Input → state (live, every input event).
   angleInput.addEventListener('input', () => {
@@ -46,6 +49,10 @@ export function initOverlay(handlers: OverlayHandlers): OverlayApi {
     const v = Number(velInput.value);
     setState({ velocity: v });
   });
+  dirInput.addEventListener('input', () => {
+    const v = Number(dirInput.value);
+    setState({ direction: v });
+  });
 
   throwBtn.addEventListener('click', (e) => {
     e.preventDefault();
@@ -54,14 +61,17 @@ export function initOverlay(handlers: OverlayHandlers): OverlayApi {
 
   // State → DOM.
   subscribe((s) => {
-    renderReadouts(s.angle, s.velocity);
+    // Keep slider position in sync if state was updated externally (e.g. auto-aim).
+    if (Number(dirInput.value) !== s.direction) dirInput.value = String(s.direction);
+    renderReadouts(s.angle, s.velocity, s.direction);
     renderControlsVisibility(controls, s.placed, s.mode);
     renderButton(throwBtn, s.mode);
   });
 
-  function renderReadouts(angle: number, velocity: number): void {
+  function renderReadouts(angle: number, velocity: number, direction: number): void {
     angleValue.textContent = `${Math.round(angle)}°`;
     velValue.textContent = `${velocity.toFixed(1)} m/s`;
+    dirValue.textContent = `${Math.round(direction)}°`;
   }
 
   return {

@@ -87,6 +87,7 @@ const overlay = initOverlay({
 subscribe((s) => {
   // Mirror launcher arrow + trajectory to the current sliders, but only while aiming.
   launcher.setAngle(s.angle);
+  launcher.root.rotation.y = (s.direction * Math.PI) / 180;
   if (s.mode === 'aiming') {
     recomputeTrajectory();
     trajectory.setVisible(true);
@@ -175,7 +176,9 @@ function applyAutoAim(viewerPose: XRViewerPose): void {
   if (dx * dx + dz * dz < 1e-6) return; // viewer is directly above launcher; skip
   // Make local +X point along (dx, dz) in the XZ plane.
   const yaw = Math.atan2(-dz, dx);
-  launcher.root.rotation.y = yaw;
+  // Seed the Direction slider with the auto-aim yaw; the subscribe handler will then
+  // continuously drive launcher.root.rotation.y from state.direction.
+  setState({ direction: (yaw * 180) / Math.PI });
 }
 
 // ---------- Throw / Retrieve ----------
