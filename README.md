@@ -82,3 +82,4 @@ Simulated at 50 Hz up to `t = 4 s` (or until landing). See [src/physics/projecti
 - **Phone shows a cert warning** — expected with the in-process self-signed cert. Tap *Advanced → Proceed*. To avoid it, tunnel with `ngrok http https://localhost:5173` for a real trusted URL, or deploy a preview build (Vercel/Netlify).
 - **No reticle appears** — move the phone slowly, scan the floor or a textured surface. Featureless white walls/floors won't track.
 - **Hand-pill never shows on a headset** — confirm the browser granted `hand-tracking` (check the browser's session permission dialog).
+  empty for deployment
